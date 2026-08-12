@@ -1,0 +1,20 @@
+# Pytorch with CUDA 12 and Jupyter
+# Also supports -> Tenserflow, PDF Generator
+services:
+  jupyter-gpu:
+    image: notebook12
+    container_name: jupyter_gpu_container
+    restart: always
+    ports:
+      - "8888:8888"
+    volumes:
+      - /home/nileema/ai/JUPYTER/notebooks:/workspace
+    environment:
+      - JUPYTER_TOKEN=token
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
